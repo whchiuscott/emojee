@@ -13,14 +13,17 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [authenticating, setAuthenticating] = useState(false);
-  const { isRegister, setIsRegister, isLogin, setIsLogin, login } = useAuth();
+  const { isLogin, setIsLogin, login } = useAuth();
   const router = useRouter();
+  const [errorMessage, setErrorMessage] = useState("");
 
   async function handleSubmit() {
-    if (!password || !email || password.length < 6) {
+    if (!password || !email) {
+      setErrorMessage("Email or password is not valid!");
       return;
     }
     setAuthenticating(true);
+    setErrorMessage("");
     setIsLogin(true);
     try {
       if (isLogin) {
@@ -30,6 +33,7 @@ export default function LoginPage() {
       }
     } catch (error) {
       console.log(error.message);
+      setErrorMessage("Fail to login: " + error.message);
     } finally {
       setAuthenticating(false);
     }
@@ -41,6 +45,11 @@ export default function LoginPage() {
         Log in
       </h3>
       <p>You&#39;re one step away!</p>
+      {errorMessage && (
+        <p className="text-red-500 max-w-[400px] w-full text-center">
+          {errorMessage}
+        </p>
+      )}
       <input
         value={email}
         onChange={(e) => {

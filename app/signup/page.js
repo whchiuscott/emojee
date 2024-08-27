@@ -15,12 +15,28 @@ export default function SignupPage() {
   const [authenticating, setAuthenticating] = useState(false);
   const { isRegister, setIsRegister, signup } = useAuth();
   const router = useRouter();
+  const [errorMessage, setErrorMessage] = useState("");
 
   async function handleSubmit() {
-    if (!password || !email || password.length < 6) {
+    if (!password && !email) {
+      setErrorMessage("Email and password are required!");
       return;
     }
+    if (!email) {
+      setErrorMessage("Email is required!");
+      return;
+    }
+    if (!password) {
+      setErrorMessage("Password is required!");
+      return;
+    }
+    if (!password.length < 6) {
+      setErrorMessage("Password should be at least 6 digits!");
+      return;
+    }
+
     setAuthenticating(true);
+    setErrorMessage("");
     setIsRegister(true);
     try {
       if (isRegister) {
@@ -30,6 +46,7 @@ export default function SignupPage() {
       }
     } catch (error) {
       console.log(error.message);
+      setErrorMessage("Fail to login: " + error.message);
     } finally {
       setAuthenticating(false);
     }
@@ -41,6 +58,11 @@ export default function SignupPage() {
         Register
       </h3>
       <p>You&#39;re one step away!</p>
+      {errorMessage && (
+        <p className="text-red-500 max-w-[400px] w-full text-center">
+          {errorMessage}
+        </p>
+      )}
       <input
         value={email}
         onChange={(e) => {
