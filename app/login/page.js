@@ -39,6 +39,12 @@ export default function LoginPage() {
     }
   }
 
+  function handleKeyDown(event) {
+    if (event.key === "Enter") {
+      handleSubmit();
+    }
+  }
+
   return (
     <div className="flex flex-col flex-1 justify-center items-center gap-4">
       <h3 className={"text-4xl sm:text-5xl md:text-6xl " + fugaz.className}>
@@ -55,6 +61,7 @@ export default function LoginPage() {
         onChange={(e) => {
           setEmail(e.target.value);
         }}
+        onKeyDown={handleKeyDown}
         className="max-w-[400px] w-full mx-auto px-3 duration-200 hover:border-blue-600 focus:border-blue-600 py-2 sm:py-3 border border-solid border-blue-400 rounded-full outline-none"
         placeholder="Email"
       />
@@ -63,6 +70,7 @@ export default function LoginPage() {
         onChange={(e) => {
           setPassword(e.target.value);
         }}
+        onKeyDown={handleKeyDown}
         className="max-w-[400px] w-full mx-auto px-3 duration-200 hover:border-blue-600 focus:border-blue-600 py-2 sm:py-3 border border-solid border-blue-400 rounded-full outline-none"
         placeholder="Password"
         type="password"
