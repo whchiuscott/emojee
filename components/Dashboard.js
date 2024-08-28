@@ -106,7 +106,10 @@ export default function Dashboard() {
       <div className="grid grid-cols-3 p-4 gap-4 bg-blue-50 text-blue-500 rounded-lg ">
         {Object.keys(statuses).map((status, statusIndex) => {
           return (
-            <div key={statusIndex} className=" flex flex-col gap-1 sm:gap-2">
+            <div
+              key={statusIndex}
+              className=" flex flex-col justify-center items-center gap-1 sm:gap-2"
+            >
               <p className="font-medium capitalize text-xs sm:text-sm truncate">
                 {status.replaceAll("_", " ")}
               </p>
