@@ -9,8 +9,8 @@ const fugaz = Fugaz_One({ subsets: ["latin"], weight: ["400"] });
 const opensans = Open_Sans({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "EMOJEE📝",
-  description: "Track your daily mood, every day of the year!",
+  title: "EMOJEE🖋️",
+  description: "Track how you feel each day, all year round!",
 };
 
 export default function RootLayout({ children }) {

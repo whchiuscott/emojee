@@ -19,7 +19,7 @@ export default function Hero() {
       </h1>
       <p className="text-lg sm:text-xl md:text-2xl text-center w-full mx-auto max-w-[600px]">
         <span className="font-semibold">Track</span> how you feel each day,{" "}
-        <span className="font-semibold">all year round!</span>
+        <span className="font-semibold">all year round! 📝</span>
       </p>
       <CallToAction />
       <Calendar demo />
