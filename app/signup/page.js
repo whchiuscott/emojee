@@ -45,7 +45,7 @@ export default function SignupPage() {
       setErrorMessage("Password is required!");
       return;
     }
-    if (!password.length < 6) {
+    if (password.length < 6) {
       setErrorMessage("Password should be at least 6 digits!");
       return;
     }
