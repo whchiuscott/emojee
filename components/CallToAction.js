@@ -3,11 +3,13 @@ import Link from "next/link";
 import React from "react";
 import Button from "./Button";
 import { useAuth } from "@/app/context/AuthContext";
+import { usePathname } from "next/navigation";
 
 export default function CallToAction() {
   const { currentUser } = useAuth();
+  const pathname = usePathname();
 
-  if (currentUser) {
+  if (currentUser && pathname === "/") {
     return (
       <div className="max-w-[600px] mx-auto w-full">
         <Link href="/dashboard">
