@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Fugaz_One } from "next/font/google";
 import Calendar from "./Calendar";
 import { useAuth } from "@/app/context/AuthContext";
-import { doc, setDoc } from "firebase/firestore";
+import { average, doc, setDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import Loading from "./Loading";
 import LoginPage from "@/app/login/page";
@@ -85,6 +85,33 @@ export default function Dashboard() {
     Delighted: "🥳",
   };
 
+  // let average_mood_emoji = null;
+  // if (statuses.average_mood >= 4.5) {
+  //   return (average_mood_emoji = "🥳");
+  // }
+  // if (statuses.average_mood >= 3.5 && statuses.average_mood < 4.5) {
+  //   return (average_mood_emoji = "😄");
+  // }
+  // if (statuses.average_mood >= 2.5 && statuses.average_mood < 3.5) {
+  //   return (average_mood_emoji = "😐");
+  // }
+  // if (statuses.average_mood >= 1.5 && statuses.average_mood < 2.5) {
+  //   return (average_mood_emoji = "😵‍💫");
+  // }
+  // if (statuses.average_mood < 1.5) {
+  //   return (average_mood_emoji = "😭");
+  // }
+
+  // 計算 average_mood_emoji
+  const getAverageMoodEmoji = (averageMood) => {
+    if (averageMood >= 4.5) return "🥳";
+    if (averageMood >= 3.5) return "😄";
+    if (averageMood >= 2.5) return "😐";
+    if (averageMood >= 1.5) return "😵‍💫";
+    return "😭";
+  };
+  const average_mood_emoji = getAverageMoodEmoji(statuses.average_mood);
+
   //當currentUser, userDataObj改變時都會重新執行useEffect裡的函式
   useEffect(() => {
     if (!currentUser || !userDataObj) {
@@ -116,6 +143,7 @@ export default function Dashboard() {
               <p className={"text-base sm:text-lg " + fugaz.className}>
                 {statuses[status]}
                 {status === "num_of_days" ? " 🗓️" : ""}
+                {status === "average_mood" ? ` ${average_mood_emoji}` : ""}
               </p>
             </div>
           );
