@@ -85,23 +85,6 @@ export default function Dashboard() {
     Delighted: "🥳",
   };
 
-  // let average_mood_emoji = null;
-  // if (statuses.average_mood >= 4.5) {
-  //   return (average_mood_emoji = "🥳");
-  // }
-  // if (statuses.average_mood >= 3.5 && statuses.average_mood < 4.5) {
-  //   return (average_mood_emoji = "😄");
-  // }
-  // if (statuses.average_mood >= 2.5 && statuses.average_mood < 3.5) {
-  //   return (average_mood_emoji = "😐");
-  // }
-  // if (statuses.average_mood >= 1.5 && statuses.average_mood < 2.5) {
-  //   return (average_mood_emoji = "😵‍💫");
-  // }
-  // if (statuses.average_mood < 1.5) {
-  //   return (average_mood_emoji = "😭");
-  // }
-
   // 計算 average_mood_emoji
   const getAverageMoodEmoji = (averageMood) => {
     if (averageMood >= 4.5) return "🥳";
