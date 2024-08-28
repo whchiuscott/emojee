@@ -6,10 +6,14 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 export default function Logout() {
-  const { logout, currentUser } = useAuth();
+  const { logout, currentUser, loading } = useAuth();
   const pathname = usePathname();
 
   if (!currentUser) {
+    return null;
+  }
+
+  if (loading) {
     return null;
   }
 
