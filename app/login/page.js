@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Fugaz_One } from "next/font/google";
 import Button from "@/components/Button";
 import { useAuth } from "@/app/context/AuthContext";
@@ -13,9 +13,15 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [authenticating, setAuthenticating] = useState(false);
-  const { isLogin, setIsLogin, login } = useAuth();
+  const { isLogin, setIsLogin, login, currentUser } = useAuth();
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    if (currentUser) {
+      router.push("/dashboard");
+    }
+  }, [currentUser, router]);
 
   async function handleSubmit() {
     if (!password || !email) {
