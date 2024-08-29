@@ -32,7 +32,7 @@ export default function Dashboard() {
     }
     return {
       num_of_days: total_number_of_days,
-      average_mood: sum_moods / total_number_of_days,
+      average_mood: (sum_moods / total_number_of_days).toPrecision(2),
     };
   }
 
