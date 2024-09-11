@@ -27,6 +27,7 @@ EMOJEE is an app that allows users to record their daily moods, helping you trac
 - **語言**：HTML、JavaScript
 - **樣式**：Tailwind CSS
 - **後端與資料庫**：Firebase
+- **部署**：Vercel
 
 
 ### 專案目的＆靈感起源
@@ -70,7 +71,8 @@ __🙇🏻‍♂️感謝撥冗閱讀！🙏🏻__
 - **Frontend Frameworks**: React.js, Next.js
 - **Languages**: HTML, JavaScript
 - **Styling**: Tailwind CSS
-- **Backend and Database**: Firebase
+- **Backend and Database**: Firebase-
+- **Deployment**：Vercel
 
 ### Project Goal & Inspiration
 
