@@ -3,7 +3,8 @@
 EMOJEE 是一個讓使用者可以記錄每天心情的 APP，幫助你追蹤長期心情的變化趨勢。<br/>
 EMOJEE is an app that allows users to record their daily moods, helping you track long-term mood changes. <br/>
 
-你可以在這邊查看已部署的網站/You can view the deployed site here：[EMO記🖋️EMOJEE](https://emojee.vercel.app/)。
+你可以在這邊查看已部署的網站<br/>
+You can check out the deployed site here：[EMO記🖋️EMOJEE](https://emojee.vercel.app/)。
 
 ## 目錄
 
