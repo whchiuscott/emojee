@@ -71,7 +71,7 @@ __🙇🏻‍♂️感謝撥冗閱讀！🙏🏻__
 - **Frontend Frameworks**: React.js, Next.js
 - **Languages**: HTML, JavaScript
 - **Styling**: Tailwind CSS
-- **Backend and Database**: Firebase-
+- **Backend and Database**: Firebase
 - **Deployment**：Vercel
 
 ### Project Goal & Inspiration
