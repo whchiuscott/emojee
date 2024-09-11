@@ -12,7 +12,6 @@ import LoginPage from "@/app/login/page";
 const fugaz = Fugaz_One({ subsets: ["latin"], weight: ["400"] });
 
 export default function Dashboard() {
-  //這邊引入useAuth()並解構currentUser, userDataObj, setUserDataObj, loading
   const { currentUser, userDataObj, setUserDataObj, loading } = useAuth();
 
   const [data, setData] = useState({});
@@ -85,7 +84,7 @@ export default function Dashboard() {
     Delighted: "🥳",
   };
 
-  // 計算 average_mood_emoji
+  // calculating average_mood_emoji
   const getAverageMoodEmoji = (averageMood) => {
     if (averageMood >= 4.5) return "🥳";
     if (averageMood >= 3.5) return "😄";
@@ -95,7 +94,6 @@ export default function Dashboard() {
   };
   const average_mood_emoji = getAverageMoodEmoji(statuses.average_mood);
 
-  //當currentUser, userDataObj改變時都會重新執行useEffect裡的函式
   useEffect(() => {
     if (!currentUser || !userDataObj) {
       return;
@@ -103,7 +101,6 @@ export default function Dashboard() {
     setData(userDataObj);
   }, [currentUser, userDataObj]);
 
-  //邏輯：是否載入中、是否目前未登入
   if (loading) {
     return <Loading />;
   }
