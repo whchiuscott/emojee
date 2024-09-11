@@ -3,10 +3,7 @@ import React from "react";
 export default function Head() {
   return (
     <head>
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1"
-      ></meta>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link
         rel="apple-touch-icon"
         sizes="180x180"
