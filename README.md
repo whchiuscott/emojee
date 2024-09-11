@@ -45,7 +45,7 @@ You can check out the deployed site here：[EMO記🖋️EMOJEE](https://emojee.
 
 1. Clone 專案至本地：
    ```bash
-   git clone https://github.com/your-username/emojee.git
+   git clone https://github.com/whchiuscott/emojee.git
 2. 安裝相關依賴套件：
    ```bash
    npm install
@@ -89,7 +89,7 @@ This project aims to practice development skills with HTML, Tailwind CSS, JavaSc
 
 1. Clone the project locally:
    ```bash
-   git clone https://github.com/your-username/emojee.git
+   git clone https://github.com/whchiuscott/emojee.git
 2. Install dependencies:
    ```bash
    npm install
@@ -103,4 +103,4 @@ __🙇🏻‍♂️Thank you for taking the time to read!🙏🏻__
 
 
 
-_Copyright © Scott Chiu 2024_
+***Copyright © Scott Chiu 2024***
