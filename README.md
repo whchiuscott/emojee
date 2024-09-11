@@ -101,4 +101,6 @@ This project aims to practice development skills with HTML, Tailwind CSS, JavaSc
 __🙇🏻‍♂️Thank you for taking the time to read!🙏🏻__
 
 
+
+
 _Copyright © Scott Chiu 2024_
