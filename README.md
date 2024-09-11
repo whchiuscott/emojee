@@ -51,6 +51,7 @@ EMOJEE is an app that allows users to record their daily moods, helping you trac
    npm run dev
 4. 開啟瀏覽器並前往 http://localhost:3000 查看此專案。
 
+🙇🏻‍♂️感謝撥冗閱讀！🙏🏻
 
 ## English Description
 
@@ -92,5 +93,8 @@ This project aims to practice development skills with HTML, Tailwind CSS, JavaSc
    ```bash
    npm run dev
 4. Open your browser and go to http://localhost:3000 to view the project.
+
+🙇🏻‍♂️Thank you for taking the time to read!🙏🏻
+
 
 _Copyright © Scott Chiu 2024_
