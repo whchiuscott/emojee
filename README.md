@@ -11,6 +11,7 @@ You can check out the deployed site here：[EMO記🖋️EMOJEE](https://emojee.
 - [中文](#中文介紹)
 - [English](#english-description)
 
+
 ## 中文介紹
 
 ### 功能介紹
@@ -55,6 +56,7 @@ You can check out the deployed site here：[EMO記🖋️EMOJEE](https://emojee.
 4. 開啟瀏覽器並前往 http://localhost:3000 查看此專案。
 
 __🙇🏻‍♂️感謝撥冗閱讀！🙏🏻__
+
 
 ## English Description
 
