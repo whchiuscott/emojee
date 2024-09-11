@@ -44,4 +44,4 @@ EMOJEE 是一個讓使用者可以記錄每天心情的 APP，幫助你追蹤長
    npm run dev
 4. 開啟瀏覽器並前往 http://localhost:3000 查看專案。
 
-Copyright © Scott Chiu 2024
+_Copyright © Scott Chiu 2024_
