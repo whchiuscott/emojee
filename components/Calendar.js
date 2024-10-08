@@ -44,8 +44,6 @@ export default function Calendar(props) {
   const data = completeData?.[selectedYear]?.[numericMonth] || {};
 
   function handleIncrementMonth(val) {
-    // value +1 -1
-    // if we hit the bounds of the months, then we can just adjust the year that is displayed instead
     if (numericMonth + val < 0) {
       // set month value = 11 and decrement the year
       setSelectedYear((curr) => curr - 1);
@@ -119,7 +117,7 @@ export default function Calendar(props) {
                 }
 
                 let color = demo
-                  ? gradients.blue[baseRating[dayIndex] || 0] // 確保取值正確
+                  ? gradients.blue[baseRating[dayIndex] || 0]
                   : data[dayIndex]
                   ? gradients.blue[data[dayIndex]]
                   : "white";
