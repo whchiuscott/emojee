@@ -35,7 +35,7 @@ export default function Calendar(props) {
   const { demo, completeData, handleSetMood } = props;
   const now = new Date();
   const currMonth = now.getMonth();
-  const [selectedMonth, setSelectMonth] = useState(
+  const [selectedMonth, setSelectedMonth] = useState(
     Object.keys(months)[currMonth]
   );
   const [selectedYear, setSelectedYear] = useState(now.getFullYear());
@@ -49,13 +49,13 @@ export default function Calendar(props) {
     if (numericMonth + val < 0) {
       // set month value = 11 and decrement the year
       setSelectedYear((curr) => curr - 1);
-      setSelectMonth(monthsArr[monthsArr.length - 1]);
+      setSelectedMonth(monthsArr[monthsArr.length - 1]);
     } else if (numericMonth + val > 11) {
       // set month val = 0 and increment the year
       setSelectedYear((curr) => curr + 1);
-      setSelectMonth(monthsArr[0]);
+      setSelectedMonth(monthsArr[0]);
     } else {
-      setSelectMonth(monthsArr[numericMonth + val]);
+      setSelectedMonth(monthsArr[numericMonth + val]);
     }
   }
 
