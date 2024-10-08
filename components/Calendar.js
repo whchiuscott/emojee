@@ -65,11 +65,7 @@ export default function Calendar(props) {
     1
   );
   const firstDayOfMonth = monthNow.getDay();
-  const daysInMonth = new Date(
-    selectedYear,
-    Object.keys(selectedMonth).indexOf(selectedMonth) + 1,
-    0
-  ).getDate();
+  const daysInMonth = new Date(selectedYear, numericMonth + 1, 0).getDate();
 
   const daysToDisplay = firstDayOfMonth + daysInMonth;
 
@@ -111,22 +107,20 @@ export default function Calendar(props) {
                 let dayIndex =
                   rowIndex * 7 + dayOfWeekIndex - (firstDayOfMonth - 1);
 
-                let dayDisplay =
-                  dayIndex > daysInMonth
-                    ? false
-                    : row === 0 && dayOfWeekIndex < firstDayOfMonth
-                    ? false
-                    : true;
+                let dayDisplay = dayIndex > 0 && dayIndex <= daysInMonth;
 
-                let isToday = dayIndex === now.getDate();
+                let isToday =
+                  dayIndex === now.getDate() &&
+                  selectedYear === now.getFullYear() &&
+                  numericMonth === now.getMonth();
 
                 if (!dayDisplay) {
                   return <div className="bg-white" key={dayOfWeekIndex} />;
                 }
 
                 let color = demo
-                  ? gradients.blue[baseRating[dayIndex]]
-                  : dayIndex in data
+                  ? gradients.blue[baseRating[dayIndex] || 0] // 確保取值正確
+                  : data[dayIndex]
                   ? gradients.blue[data[dayIndex]]
                   : "white";
 
