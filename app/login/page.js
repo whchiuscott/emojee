@@ -23,17 +23,39 @@ export default function LoginPage() {
     }
   }, [currentUser, router]);
 
+  function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  }
+
   async function handleSubmit() {
-    if (!password || !email) {
-      setErrorMessage("Email or password is not valid!");
+    if (!password && !email) {
+      setErrorMessage("Email and password are required!");
       return;
     }
+    if (!email) {
+      setErrorMessage("Email is required!");
+      return;
+    }
+    if (!validateEmail(email)) {
+      setErrorMessage("Email format is not valid!");
+      return;
+    }
+    if (!password) {
+      setErrorMessage("Password is required!");
+      return;
+    }
+    if (password.length < 6) {
+      setErrorMessage("Password should be at least 6 digits!");
+      return;
+    }
+
     setAuthenticating(true);
     setErrorMessage("");
     setIsLogin(true);
     try {
       if (isLogin) {
-        console.log("Loggin in existing user");
+        console.log("Logging in existing user");
         await login(email, password);
         router.push("/dashboard");
       }
