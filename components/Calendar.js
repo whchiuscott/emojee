@@ -18,7 +18,7 @@ const months = {
   December: "Dec",
 };
 const monthsArr = Object.keys(months);
-const now = new Date();
+
 const dayList = [
   "Sunday",
   "Monday",
@@ -126,7 +126,7 @@ export default function Calendar(props) {
                   <div
                     style={{ background: color }}
                     className={
-                      "text-xs sm:text-sm border border-solid p-2 flex items-center gap-2 justify-between rounded-lg " +
+                      "text-xs sm:text-sm border border-solid p-2 flex items-center gap-2 justify-center rounded-lg " +
                       (isToday ? " border-blue-400" : " border-blue-100") +
                       (color === "white" ? " text-blue-400" : " text-black")
                     }
