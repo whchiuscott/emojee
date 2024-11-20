@@ -32,7 +32,7 @@ const dayList = [
 const fugaz = Fugaz_One({ subsets: ["latin"], weight: ["400"] });
 
 export default function Calendar(props) {
-  const { demo, completeData, handleSetMood } = props;
+  const { demo, completeData } = props;
   const now = new Date();
   const currMonth = now.getMonth();
   const [selectedMonth, setSelectedMonth] = useState(

@@ -160,7 +160,7 @@ export default function Dashboard() {
           );
         })}
       </div>
-      <Calendar completeData={data} handleSetMood={handleSetMood} />
+      <Calendar completeData={data} />
     </div>
   );
 }
