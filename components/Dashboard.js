@@ -29,9 +29,13 @@ export default function Dashboard() {
         }
       }
     }
+    let moodScore =
+      total_number_of_days > 0
+        ? (sum_moods / total_number_of_days).toPrecision(2)
+        : "";
     return {
       num_of_days: total_number_of_days,
-      average_mood: (sum_moods / total_number_of_days).toPrecision(2),
+      average_mood: moodScore,
     };
   }
 
@@ -90,7 +94,8 @@ export default function Dashboard() {
     if (averageMood >= 3.5) return "😄";
     if (averageMood >= 2.5) return "😐";
     if (averageMood >= 1.5) return "😵‍💫";
-    return "😭";
+    if (averageMood > 0) return "😭";
+    return "❓";
   };
   const average_mood_emoji = getAverageMoodEmoji(statuses.average_mood);
 
