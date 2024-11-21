@@ -3,7 +3,7 @@ import { baseRating, gradients } from "@/utils";
 import { Fugaz_One } from "next/font/google";
 import React, { useState } from "react";
 
-const monthsArr = [
+const monthList = [
   "January",
   "February",
   "March",
@@ -33,31 +33,41 @@ const fugaz = Fugaz_One({ subsets: ["latin"], weight: ["400"] });
 export default function Calendar(props) {
   const { demo, completeData } = props;
   const now = new Date();
-  const currMonth = now.getMonth(); //current month, 0-11 (index)
-  const [selectedMonth, setSelectedMonth] = useState(monthsArr[currMonth]); //using currently "selected" month index to show initial UI
+  const currentMonthIndex = now.getMonth(); //current month, 0-11 (index)
+  const [selectedMonth, setSelectedMonth] = useState(
+    monthList[currentMonthIndex]
+  ); //using currently "selected" month index to show initial UI
   const [selectedYear, setSelectedYear] = useState(now.getFullYear()); //currently "selected" year
 
-  const numericMonth = monthsArr.indexOf(selectedMonth); // currently "selected" month index
-  const data = completeData?.[selectedYear]?.[numericMonth] || {}; //get "selected" year & month data from completeData, set to {} if unavailable
+  const selectedMonthIndex = monthList.indexOf(selectedMonth); // currently "selected" month index
+  const data = completeData?.[selectedYear]?.[selectedMonthIndex] || {}; //get "selected" year & month data from completeData, set to {} if unavailable
 
   function handleIncrementMonth(val) {
     //val can be +1 or -1
-    if (numericMonth + val < 0) {
+    if (selectedMonthIndex + val < 0) {
       // set month value = 11 (Dec) and decrement the year
       setSelectedYear((curr) => curr - 1); //go to prev year
-      setSelectedMonth(monthsArr[monthsArr.length - 1]); //set to Dec
-    } else if (numericMonth + val > 11) {
+      setSelectedMonth(monthList[monthList.length - 1]); //set to Dec
+    } else if (selectedMonthIndex + val > 11) {
       // set month val = 0 (Jan) and increment the year
       setSelectedYear((curr) => curr + 1); //go to next year
-      setSelectedMonth(monthsArr[0]); //set to Jan
+      setSelectedMonth(monthList[0]); //set to Jan
     } else {
-      setSelectedMonth(monthsArr[numericMonth + val]);
+      setSelectedMonth(monthList[selectedMonthIndex + val]);
     }
   }
 
-  const monthNow = new Date(selectedYear, monthsArr.indexOf(selectedMonth), 1); //create a date obj, with currently "selected" year/month/1st/day
-  const firstDayOfMonth = monthNow.getDay(); //what day it is for the 1st
-  const daysInMonth = new Date(selectedYear, numericMonth + 1, 0).getDate(); //create a date obj, with "0" being the last day of this month, getting the total days of this month
+  const selectedMonthObj = new Date(
+    selectedYear,
+    monthList.indexOf(selectedMonth),
+    1
+  ); //create a date obj, with currently "selected" year/month/1st/day
+  const firstDayOfMonth = selectedMonthObj.getDay(); //what day it is for the 1st
+  const daysInMonth = new Date(
+    selectedYear,
+    selectedMonthIndex + 1,
+    0
+  ).getDate(); //create a date obj, with "0" being the last day of this month, getting the total days of this month
 
   const daysToDisplay = firstDayOfMonth + daysInMonth; //including the empty cells
 
@@ -110,7 +120,7 @@ export default function Calendar(props) {
                 let isToday =
                   dayIndex === now.getDate() &&
                   selectedYear === now.getFullYear() &&
-                  numericMonth === now.getMonth();
+                  selectedMonthIndex === now.getMonth();
 
                 //blank if cell not within this month
                 if (!dayDisplay) {
