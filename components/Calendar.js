@@ -36,13 +36,13 @@ export default function Calendar(props) {
   const currentMonthIndex = now.getMonth(); //current month, 0-11 (index)
   const [selectedMonth, setSelectedMonth] = useState(
     monthList[currentMonthIndex]
-  ); //using currently "selected" month index to show initial UI
-  const [selectedYear, setSelectedYear] = useState(now.getFullYear()); //currently "selected" year
+  ); //currently "selected" month index to display, initially current month
+  const [selectedYear, setSelectedYear] = useState(now.getFullYear()); //currently "selected" year index to display, initially current year
 
   const selectedMonthIndex = monthList.indexOf(selectedMonth); // currently "selected" month index
   const data = completeData?.[selectedYear]?.[selectedMonthIndex] || {}; //get "selected" year & month data from completeData, set to {} if unavailable
 
-  function handleIncrementMonth(val) {
+  function adjustMonth(val) {
     //val can be +1 or -1
     if (selectedMonthIndex + val < 0) {
       // set month value = 11 (Dec) and decrement the year
@@ -62,24 +62,24 @@ export default function Calendar(props) {
     monthList.indexOf(selectedMonth),
     1
   ); //create a date obj, with currently "selected" year/month/1st/day
-  const firstDayOfMonth = selectedMonthObj.getDay(); //what day it is for the 1st
+  const firstDayOfMonth = selectedMonthObj.getDay(); //what day it is for the 1st, 0-6
   const daysInMonth = new Date(
     selectedYear,
     selectedMonthIndex + 1,
     0
-  ).getDate(); //create a date obj, with "0" being the last day of this month, getting the total days of this month
+  ).getDate(); //create a date obj, with "0" of the next month being the "last" day of this month, getting the total days of this month
 
-  const daysToDisplay = firstDayOfMonth + daysInMonth; //including the empty cells
+  const daysToDisplay = firstDayOfMonth + daysInMonth; // empty cells at the front (equals firstDayofMonth) & days in this month
 
   const numRows = Math.floor(daysToDisplay / 7) + (daysToDisplay % 7 ? 1 : 0);
 
   return (
     <div className="flex flex-col gap-2">
-      {/* buttons and month/day */}
+      {/* buttons and month/year */}
       <div className="grid grid-cols-5 gap-4">
         <button
           onClick={() => {
-            handleIncrementMonth(-1);
+            adjustMonth(-1);
           }}
           className="mr-auto text-blue-400 text-lg sm:text-xl duration-200 hover:opacity-60"
         >
@@ -95,7 +95,7 @@ export default function Calendar(props) {
         </p>
         <button
           onClick={() => {
-            handleIncrementMonth(+1);
+            adjustMonth(+1);
           }}
           className="ml-auto text-blue-400 text-lg sm:text-xl duration-200 hover:opacity-60"
         >
@@ -106,17 +106,17 @@ export default function Calendar(props) {
       {/* calendar cells */}
       <div className="flex flex-col overflow-hidden gap-1 py-4 sm:py-6 md:py-10">
         {/* each row (week) */}
-        {[...Array(numRows).keys()].map((row, rowIndex) => {
+        {[...Array(numRows).keys()].map((_row, rowIndex) => {
           return (
             <div key={rowIndex} className="grid grid-cols-7 gap-1">
               {/* every day of the week */}
-              {dayList.map((dayOfWeek, dayOfWeekIndex) => {
+              {dayList.map((_dayOfWeek, dayOfWeekIndex) => {
                 let dayIndex =
                   rowIndex * 7 + dayOfWeekIndex - (firstDayOfMonth - 1); //date for each cell
 
-                let dayDisplay = dayIndex > 0 && dayIndex <= daysInMonth; //display if cell is within this month
+                let dayDisplay = dayIndex > 0 && dayIndex <= daysInMonth; //display if cell date is within this month
 
-                //if it is today, has different style
+                //checking if it is date/month/year is today, if so apply different style
                 let isToday =
                   dayIndex === now.getDate() &&
                   selectedYear === now.getFullYear() &&
@@ -127,7 +127,7 @@ export default function Calendar(props) {
                   return <div className="bg-white" key={dayOfWeekIndex} />;
                 }
 
-                //deciding color: check if demo or not, then check if within month (blue, otherwise blank)
+                // color for each cell: check if demo or not, then check if within month (blue, otherwise blank)
                 let color = demo
                   ? gradients.blue[baseRating[dayIndex] || 0]
                   : data[dayIndex]
