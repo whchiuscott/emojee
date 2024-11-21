@@ -11,6 +11,7 @@ import React, { useState, useContext, useEffect } from "react";
 
 const AuthContext = React.createContext();
 
+//define a custom hook, easier access to the context state throughout our app
 export function useAuth() {
   return useContext(AuthContext);
 }
@@ -37,8 +38,10 @@ export function AuthProvider({ children }) {
   }
 
   useEffect(() => {
+    //This will listen for the auth state changes
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       try {
+        //Set the user to our local context state
         setLoading(true);
         setCurrentUser(user);
         if (!user) {
@@ -46,6 +49,7 @@ export function AuthProvider({ children }) {
           return;
         }
 
+        //If user exists, fetch data from firebase database
         console.log("Fetching User Data");
         const docRef = doc(db, "users", user.uid);
         const docSnap = await getDoc(docRef);
@@ -63,9 +67,11 @@ export function AuthProvider({ children }) {
       }
     });
 
+    //This cleans up our app when it's not necessary
     return unsubscribe;
   }, []);
 
+  //value obj contains global states
   const value = {
     currentUser,
     userDataObj,
