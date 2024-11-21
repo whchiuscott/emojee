@@ -3,23 +3,20 @@ import { baseRating, gradients } from "@/utils";
 import { Fugaz_One } from "next/font/google";
 import React, { useState } from "react";
 
-const months = {
-  January: "Jan",
-  February: "Feb",
-  March: "Mar",
-  April: "Apr",
-  May: "May",
-  June: "Jun",
-  July: "Jul",
-  August: "Aug",
-  September: "Sept",
-  October: "Oct",
-  November: "Nov",
-  December: "Dec",
-};
-
-//an array of strings, for months, like [ "January", "February", ..., "December" ]
-const monthsArr = Object.keys(months);
+const monthsArr = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
 const dayList = [
   "Sunday",
@@ -37,9 +34,7 @@ export default function Calendar(props) {
   const { demo, completeData } = props;
   const now = new Date();
   const currMonth = now.getMonth(); //current month, 0-11 (index)
-  const [selectedMonth, setSelectedMonth] = useState(
-    Object.keys(months)[currMonth]
-  ); //using currently "selected" month index to show initial UI
+  const [selectedMonth, setSelectedMonth] = useState(monthsArr[currMonth]); //using currently "selected" month index to show initial UI
   const [selectedYear, setSelectedYear] = useState(now.getFullYear()); //currently "selected" year
 
   const numericMonth = monthsArr.indexOf(selectedMonth); // currently "selected" month index
@@ -60,11 +55,7 @@ export default function Calendar(props) {
     }
   }
 
-  const monthNow = new Date(
-    selectedYear,
-    Object.keys(months).indexOf(selectedMonth),
-    1
-  ); //create a date obj, with currently "selected" year/month/1st/day
+  const monthNow = new Date(selectedYear, monthsArr.indexOf(selectedMonth), 1); //create a date obj, with currently "selected" year/month/1st/day
   const firstDayOfMonth = monthNow.getDay(); //what day it is for the 1st
   const daysInMonth = new Date(selectedYear, numericMonth + 1, 0).getDate(); //create a date obj, with "0" being the last day of this month, getting the total days of this month
 
