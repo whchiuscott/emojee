@@ -13,7 +13,8 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [authenticating, setAuthenticating] = useState(false);
-  const { isLogin, setIsLogin, login, currentUser } = useAuth();
+  const { login, currentUser } = useAuth();
+  const [isLogin, setIsLogin] = useState(true);
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState("");
 

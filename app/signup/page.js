@@ -13,7 +13,8 @@ export default function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [authenticating, setAuthenticating] = useState(false);
-  const { isRegister, setIsRegister, signup, currentUser } = useAuth();
+  const { signup, currentUser } = useAuth();
+  const [isRegister, setIsRegister] = useState(true);
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState("");
 
