@@ -20,8 +20,6 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [userDataObj, setUserDataObj] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [isRegister, setIsRegister] = useState(true);
-  const [isLogin, setIsLogin] = useState(true);
 
   //Auth Handlers
   function signup(email, password) {
@@ -80,10 +78,6 @@ export function AuthProvider({ children }) {
     logout,
     login,
     loading,
-    isRegister,
-    setIsRegister,
-    isLogin,
-    setIsLogin,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
