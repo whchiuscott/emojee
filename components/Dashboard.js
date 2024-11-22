@@ -17,24 +17,24 @@ export default function Dashboard() {
   const [data, setData] = useState({});
 
   function countValues() {
-    let total_number_of_days = 0;
-    let sum_moods = 0;
+    let totalNumberOfDays = 0;
+    let sumMoods = 0;
     for (let year in data) {
       for (let month in data[year]) {
         for (let day in data[year][month]) {
-          let days_mood = data[year][month][day];
-          total_number_of_days++;
-          sum_moods += days_mood;
+          let daysMood = data[year][month][day];
+          totalNumberOfDays++;
+          sumMoods += daysMood;
         }
       }
     }
     let moodScore =
-      total_number_of_days > 0
-        ? (sum_moods / total_number_of_days).toPrecision(2)
+      totalNumberOfDays > 0
+        ? (sumMoods / totalNumberOfDays).toPrecision(2)
         : "";
     return {
-      num_of_days: total_number_of_days,
-      average_mood: moodScore,
+      numOfDays: totalNumberOfDays,
+      averageMood: moodScore,
     };
   }
 
@@ -88,7 +88,7 @@ export default function Dashboard() {
     Delighted: "🥳",
   };
 
-  // calculating average_mood_emoji
+  // calculating averageMoodEmoji
   const getAverageMoodEmoji = (averageMood) => {
     if (averageMood >= 4.5) return "🥳";
     if (averageMood >= 3.5) return "😄";
@@ -97,7 +97,7 @@ export default function Dashboard() {
     if (averageMood > 0) return "😭";
     return "❓";
   };
-  const average_mood_emoji = getAverageMoodEmoji(statuses.average_mood);
+  const averageMoodEmoji = getAverageMoodEmoji(statuses.averageMood);
 
   useEffect(() => {
     if (!currentUser || !userDataObj) {
@@ -127,8 +127,8 @@ export default function Dashboard() {
               </p>
               <p className={"text-base sm:text-lg " + fugaz.className}>
                 {statuses[status]}
-                {status === "num_of_days" ? " 🗓️" : ""}
-                {status === "average_mood" ? ` ${average_mood_emoji}` : ""}
+                {status === "numOfDays" ? " 🗓️" : ""}
+                {status === "averageMood" ? ` ${averageMoodEmoji}` : ""}
               </p>
             </div>
           );
