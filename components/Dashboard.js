@@ -15,7 +15,6 @@ export default function Dashboard() {
   const { currentUser, userDataObj, setUserDataObj, loading } = useAuth();
 
   const [data, setData] = useState({});
-  const now = new Date();
 
   function countValues() {
     let total_number_of_days = 0;
@@ -39,6 +38,7 @@ export default function Dashboard() {
     };
   }
 
+  const now = new Date();
   const statuses = {
     ...countValues(),
     time_remaining: `${23 - now.getHours()}H ${60 - now.getMinutes()}M`,
