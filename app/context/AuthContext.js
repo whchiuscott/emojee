@@ -17,8 +17,8 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState(null);
-  const [userDataObj, setUserDataObj] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null); //current user obj from firebase
+  const [userDataObj, setUserDataObj] = useState(null); //storing user data from firestore in an obj
   const [loading, setLoading] = useState(true);
 
   //Auth Handlers

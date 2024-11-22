@@ -13,9 +13,9 @@ const fugaz = Fugaz_One({ subsets: ["latin"], weight: ["400"] });
 
 export default function Dashboard() {
   const { currentUser, userDataObj, setUserDataObj, loading } = useAuth();
+  const [data, setData] = useState({}); //local state
 
-  const [data, setData] = useState({});
-
+  //logic for top of dashboard
   function countValues() {
     let totalNumberOfDays = 0;
     let sumMoods = 0;
@@ -33,8 +33,8 @@ export default function Dashboard() {
         ? (sumMoods / totalNumberOfDays).toPrecision(2)
         : "";
     return {
-      numOfDays: totalNumberOfDays,
-      averageMood: moodScore,
+      num_of_days: totalNumberOfDays,
+      average_mood: moodScore,
     };
   }
 
@@ -44,6 +44,7 @@ export default function Dashboard() {
     time_remaining: `${23 - now.getHours()}H ${60 - now.getMinutes()}M`,
   };
 
+  //logic for setting mood
   async function handleSetMood(mood) {
     const day = now.getDate();
     const month = now.getMonth();
@@ -58,13 +59,18 @@ export default function Dashboard() {
         newData[year][month] = {};
       }
       newData[year][month][day] = mood;
+
       //update the current state
       setData(newData);
+
       //update the global state
       setUserDataObj(newData);
+
       //update firebase
+      //create a firebase doc and refer to it
       const docRef = doc(db, "users", currentUser.uid);
-      const res = await setDoc(
+      //setting/updating the mood data into firebase doc
+      await setDoc(
         docRef,
         {
           [year]: {
@@ -73,13 +79,14 @@ export default function Dashboard() {
             },
           },
         },
-        { merge: true }
+        { merge: true } //only updating mood for this day/key, without affecting the rest
       );
     } catch (error) {
       console.log("Failed to set data: ", error.message);
     }
   }
 
+  //moods obj
   const moods = {
     Tragic: "😭",
     "%$#&": "😵‍💫",
@@ -88,16 +95,16 @@ export default function Dashboard() {
     Delighted: "🥳",
   };
 
-  // calculating averageMoodEmoji
-  const getAverageMoodEmoji = (averageMood) => {
-    if (averageMood >= 4.5) return "🥳";
-    if (averageMood >= 3.5) return "😄";
-    if (averageMood >= 2.5) return "😐";
-    if (averageMood >= 1.5) return "😵‍💫";
-    if (averageMood > 0) return "😭";
+  // calculating averageMoodEmoji to show
+  const getAverageMoodEmoji = (average_mood) => {
+    if (average_mood >= 4.5) return "🥳";
+    if (average_mood >= 3.5) return "😄";
+    if (average_mood >= 2.5) return "😐";
+    if (average_mood >= 1.5) return "😵‍💫";
+    if (average_mood > 0) return "😭";
     return "❓";
   };
-  const averageMoodEmoji = getAverageMoodEmoji(statuses.averageMood);
+  const averageMoodEmoji = getAverageMoodEmoji(statuses.average_mood);
 
   useEffect(() => {
     if (!currentUser || !userDataObj) {
@@ -115,6 +122,7 @@ export default function Dashboard() {
 
   return (
     <div className="flex flex-col flex-1 gap-8 sm:gap-12 md:gap-16">
+      {/* top of dashboard with three stats */}
       <div className="grid grid-cols-3 p-4 gap-4 bg-blue-50 text-blue-500 rounded-lg ">
         {Object.keys(statuses).map((status, statusIndex) => {
           return (
@@ -122,23 +130,30 @@ export default function Dashboard() {
               key={statusIndex}
               className=" flex flex-col justify-center items-center gap-1 sm:gap-2"
             >
+              {/* show stats category */}
               <p className="font-medium capitalize text-xs sm:text-sm truncate">
                 {status.replaceAll("_", " ")}
               </p>
+              {/* show stats numerics & corresponding icons */}
               <p className={"text-base sm:text-lg " + fugaz.className}>
                 {statuses[status]}
-                {status === "numOfDays" ? " 🗓️" : ""}
-                {status === "averageMood" ? ` ${averageMoodEmoji}` : ""}
+                {status === "num_of_days" ? " 🗓️" : ""}
+                {status === "average_mood" ? ` ${averageMoodEmoji}` : ""}
+                {status === "time_remaining" ? " ⏳" : ""}
               </p>
             </div>
           );
         })}
       </div>
+
+      {/* center slogan */}
       <h4
         className={`text-3xl sm:text-4xl md:text-5xl text-center ${fugaz.className} leading-snug`}
       >
         How are you <span className="textGradient">feeling</span> 💭 today?
       </h4>
+
+      {/* five emoji buttons */}
       <div className="flex items-stretch flex-wrap gap-4">
         {Object.keys(moods).map((mood, moodIndex) => {
           return (
@@ -152,7 +167,9 @@ export default function Dashboard() {
                 "p-4 px-5 rounded-2xl blueShadow duration-200 bg-blue-50 hover:bg-[#8bc6f6d7] text-center flex flex-col items-center gap-2 flex-1"
               }
             >
+              {/* show emoji */}
               <p className="text-4xl sm:text-5xl md:text-6xl">{moods[mood]}</p>
+              {/* show emoji description*/}
               <p
                 className={
                   "text-blue-500 text-xs sm:text-sm md:text-base " +
@@ -165,6 +182,7 @@ export default function Dashboard() {
           );
         })}
       </div>
+
       <Calendar completeData={data} />
     </div>
   );
