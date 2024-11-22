@@ -19,10 +19,11 @@ export default function LoginPage() {
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
+    //checking if current user exists
     if (currentUser) {
       router.push("/dashboard");
     }
-  }, [currentUser, router]);
+  }, [currentUser, router]); //router rarely changes, but still counts as external variable (from Next.js useRouter)
 
   function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -54,11 +55,12 @@ export default function LoginPage() {
     setAuthenticating(true);
     setErrorMessage("");
     setIsLogin(true);
+
     try {
       if (isLogin) {
         console.log("Logging in existing user");
-        await login(email, password);
-        router.push("/dashboard");
+        await login(email, password); //logining in via firebase
+        router.push("/dashboard"); //then go to dashboard
       }
     } catch (error) {
       console.log(error.message);
@@ -80,6 +82,7 @@ export default function LoginPage() {
         Log in
       </h3>
       <p>You&#39;re one step away!</p>
+      {/* conditional redering error message */}
       {errorMessage && (
         <p className="text-red-500 max-w-[400px] w-full text-center">
           {errorMessage}
