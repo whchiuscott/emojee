@@ -128,14 +128,18 @@ export default function Dashboard() {
           return (
             <div
               key={statusIndex}
-              className=" flex flex-col justify-center items-center gap-1 sm:gap-2"
+              className=" flex flex-col justify-center gap-1 sm:gap-2"
             >
               {/* show stats category */}
-              <p className="font-medium capitalize text-xs sm:text-sm truncate">
+              <p className="font-medium text-center capitalize text-xs sm:text-sm truncate ">
                 {status.replaceAll("_", " ")}
               </p>
               {/* show stats numerics & corresponding icons */}
-              <p className={"text-base sm:text-lg " + fugaz.className}>
+              <p
+                className={
+                  "text-base text-center sm:text-lg " + fugaz.className
+                }
+              >
                 {statuses[status]}
                 {status === "num_of_days" ? " 🗓️" : ""}
                 {status === "average_mood" ? ` ${averageMoodEmoji}` : ""}

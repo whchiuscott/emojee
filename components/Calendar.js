@@ -111,14 +111,14 @@ export default function Calendar(props) {
             <div key={rowIndex} className="grid grid-cols-7 gap-1">
               {/* every day of the week */}
               {dayList.map((_dayOfWeek, dayOfWeekIndex) => {
-                let dayIndex =
+                let date =
                   rowIndex * 7 + dayOfWeekIndex - (firstDayOfMonth - 1); //date for each cell
 
-                let dayDisplay = dayIndex > 0 && dayIndex <= daysInMonth; //display if cell date is within this month
+                let dayDisplay = date > 0 && date <= daysInMonth; //display if cell date is within this month
 
                 //checking if it is date/month/year is today, if so apply different style
                 let isToday =
-                  dayIndex === now.getDate() &&
+                  date === now.getDate() &&
                   selectedYear === now.getFullYear() &&
                   selectedMonthIndex === now.getMonth();
 
@@ -129,9 +129,9 @@ export default function Calendar(props) {
 
                 // color for each cell: check if demo or not, then check if within month (blue, otherwise blank)
                 let color = demo
-                  ? gradients.blue[baseRating[dayIndex] || 0]
-                  : data[dayIndex]
-                  ? gradients.blue[data[dayIndex]]
+                  ? gradients.blue[baseRating[date] || 0]
+                  : data[date]
+                  ? gradients.blue[data[date]]
                   : "white";
 
                 return (
@@ -145,7 +145,7 @@ export default function Calendar(props) {
                     }
                     key={dayOfWeekIndex}
                   >
-                    <p>{dayIndex}</p>
+                    <p>{date}</p>
                   </div>
                 );
               })}
