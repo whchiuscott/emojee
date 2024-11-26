@@ -111,8 +111,7 @@ export default function Calendar(props) {
             <div key={rowIndex} className="grid grid-cols-7 gap-1">
               {/* every day of the week */}
               {dayList.map((_dayOfWeek, dayOfWeekIndex) => {
-                let date =
-                  rowIndex * 7 + dayOfWeekIndex - (firstDayOfMonth - 1); //date for each cell
+                let date = rowIndex * 7 + dayOfWeekIndex - firstDayOfMonth + 1; //date for each cell
 
                 let dayDisplay = date > 0 && date <= daysInMonth; //display if cell date is within this month
 
